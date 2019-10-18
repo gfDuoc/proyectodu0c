@@ -1,0 +1,53 @@
+<%= render "shared/menu" %>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- sidebar gris -->
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+          ZZZZZ
+        </div>
+      </nav>
+      <!-- sidebar gris -->
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <%= render "shared/flash" %>
+        <h2 class="display-4 d-none d-sm-block">
+       Documentos
+        </h2>
+
+        <hr>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>XX°</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @data %>
+              <% @data.each do |item| %>
+              <tr>
+                <td><%= item["DocNum"] %></td>
+                <td><%= item["CardName"] %></td>
+                <td><%= item["DocDate"][0..10] %></td>
+                <td><%= item["Comments"] %></td>
+                <td><span class="<%=item["color"]%>"><%= item["STATUS"] %></span></td>
+                <td><%= item["U_STATUS_NOTE"] %></td>
+                <td><%= link_to 'ver', build_path(item["DocNum"]) %>
+                </tr>
+                <% end %>
+                <% else %>
+                <td colspan="5"> no hay datos </td>
+                <%= @data %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+          <%== pagy_bootstrap_nav(@pagy_a) %>
+
+          -- paginacion --
+        </main>
+      </div>
+    </div>
