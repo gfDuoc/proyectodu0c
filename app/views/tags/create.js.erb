@@ -1,0 +1,15 @@
+<%if @data.present? %>
+$('#modal-advice').text("Etiqueta Creada");
+$('#modal-advice').removeClass();
+$('#modal-advice').toggleClass("alert alert-success alert-dismissible");
+$('#tag-modal').modal('hide');
+<% flash[:success] = "Etiqueta Creada" %>
+ location.reload(); 
+<% puts @data %>
+<% else %>
+$('#modal-advice').text("<%= params[:result]%>");
+$('#modal-advice').removeClass();
+$('#modal-advice').toggleClass("alert alert-warning alert-dismissible")
+alert('error al crear Etiqueta');
+<% puts @data %>
+<% end %>

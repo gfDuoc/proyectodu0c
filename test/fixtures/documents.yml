@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  typo: MyString
+  date: 2019-10-21 22:34:38
+  author: MyString
+  company: MyString
+
+two:
+  name: MyString
+  typo: MyString
+  date: 2019-10-21 22:34:38
+  author: MyString
+  company: MyString

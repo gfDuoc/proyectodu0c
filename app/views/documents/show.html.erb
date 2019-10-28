@@ -1,0 +1,83 @@
+<%= render "shared/menu" %>
+<div id="main" class="container-fluid"  >
+  <div class="row justify-content-md-center">
+
+    <main role="main" class="col-md-10">
+      <hr>
+      <%= render "shared/flash" %>
+      <div class='card'>
+        <div class="card-header bg-secondary text-light">
+          <h4 class="card-title"><i class="fas fa-file"></i>  ver Documento N° <%= params[:id] %></h4>
+        </div>
+        <div class="card-body">
+          <% if @data.present? %>
+          <div class="row">
+            <div class="col-6">
+              <table class="table table-bordered table-sm">
+                <thead class="">
+                  <tr>
+                    <th scope="col">Titulo</th>
+                    <th scope="col"><%= @data.name %></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>autor</th>
+                    <td><%= @data.author %></td>
+                  </tr>
+                  <tr>
+                    <th>compañia</th>
+                    <td><%= @data.company %></td>
+                  </tr>
+                  <tr>
+                    <th>tipo</th>
+                    <td><%= @data.typo %></td>
+                  </tr>
+                  <tr>
+                    <th>etiquetas</th>
+                    <td><%= @data.tag %></td>
+                  </tr>
+                  <tr>
+                    <th>nota:</th>
+                    <td><%= @data.note %></td>
+                  </tr>
+                  <tr>
+                    <th>tipo</th>
+                    <td><%= @data.typo %></td>
+                  </tr>
+                  <% if  user_signed_in?  &&  @data.user_id ==  current_user.id %>
+                  <tr class="bg-secondary text-white">
+                    <th>Estado</th>
+                    <td><%= @data.status %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <div class="jumbotron">
+                <% if @data.present? && @data.anex.attached? %>
+                <p>documento anexo: <a href="<%= (url_for(@data.anex)) %>"><%=@data.anex.filename.to_s %> </a>  </p>
+                <p><% "" #image_tag @data.anex.preview(resize_to_limit: [100, 100]) ""
+                   %>  <i class="fas fa-file"></i> </p>
+                <% else %>
+                <h1>  <i class="fas fa-file"></i> </h1>
+                <span  class="badge badge-pill badge-secondary"> no tiene documento anexo</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% else %>
+          <h1> No hay documento! </h1>
+          <% end %>
+          <div class="card-footer">
+            <% if  user_signed_in?  &&  @data.user_id ==  current_user.id %>
+            <%= link_to "editar", edit_document_path, class:"btn btn-warning" %>
+            <% end %>
+            <%= link_to "Volver ", documents_path , class:"btn btn-dark" %>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>

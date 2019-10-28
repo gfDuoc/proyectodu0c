@@ -37,10 +37,10 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <%= render "shared/flash" %>
       <h2 class="display-4 d-none d-sm-block">
-        Documentos
+        Etiquetas
       </h2>
       <%if user_signed_in? %>
-      <%= link_to 'nuevo documento', new_document_path %>
+      <%= link_to 'nuevo etiqueta', new_tag_path, remote:true %>
       <%end%>
       <hr>
       <div class="table-responsive">
@@ -48,10 +48,7 @@
           <thead class="thead-dark">
             <tr>
               <th>n°</th>
-              <th>nombre</th>
-              <th>autor</th>
-              <th>fecha</th>
-              <th>tipo</th>
+              <th>descripcion</th>
               <th> → </th>
             </tr>
           </thead>
@@ -60,16 +57,13 @@
             <% @data.each do |item| %>
             <tr>
               <td><%= item["id"] %></td>
-              <td><%= item["name"] %></td>
-              <td><%= item["author"] %></td>
-              <td><%= item["date"].strftime("%Y-%m-%d") %></td>
-              <td><%= item["typo"] %></td>
-              <td><%= link_to 'ver', document_path(item["id"]) %></td>
+              <td><%= item["description"] %></td>
+              <td><%= link_to 'ver', tag_path(item["id"]) %></td>
             </tr>
             <% end %>
             <% else %>
             <tr>
-              <td>No hay Archivos disponibles </td>
+              <td>No hay etiquetas disponibles </td>
             </tr>
             <% end %>
           </tbody>

@@ -1,0 +1,26 @@
+<div id="tag-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-light">
+        <h4 class="modal-title"><i class="fas fa-pen-square"></i>Nuevo Etiqueta</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <%= form_tag tags_path, method: :post , remote: true do %>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="description">descripcion:</label>
+            <%= text_field_tag :description, params[:description] ,placeholder:'nombre de la etiqueta', class:'form-control',required:true%>
+        </div>
+      </div>
+      <div id="modal-advice" class="hide-class">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        AVISO!
+      </div>
+      <div class="modal-footer">
+        <%= submit_tag 'Guardar', class:'btn btn-success' %>
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

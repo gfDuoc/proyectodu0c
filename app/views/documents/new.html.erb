@@ -1,0 +1,61 @@
+<%= render "shared/menu" %>
+<div id="main" class="container-fluid"  >
+  <div class="row justify-content-md-center">
+
+    <main role="main" class="col-md-10">
+      <hr>
+      <%= render "shared/flash" %>
+      <div class='card'>
+        <div class="card-header bg-secondary text-light">
+          <h4 class="card-title"><i class="fas fa-file"></i>  Documento</h4>
+        </div>
+        <%= form_tag documents_path, method: :post , id:"new-send", multipart: true do %>
+        <div class="card-body">
+          <%= hidden_field_tag "user" , current_user.id %>
+          <%= hidden_field_tag  "email" , current_user.email %>
+          <small>Agregar nuevo documento al sistema</small>
+          <div class="form-group">
+            <label for="Fecha">Fecha de documento:</label>
+            <%= date_field_tag :fecha, params[:fecha], class:'form-control' ,required:true %>
+          </div>
+          <div class="form-group">
+            <label for="nombre">nombre del documento:</label>
+            <%= text_field_tag :nombre, params[:nombre] ,placeholder:'nombre del documento', class:'form-control',required:true%>
+          </div>
+          <div class="form-group">
+            <label for="autor" >autor: </label>
+            <%= text_field_tag :autor, params[:autor],placeholder:'autor del documento', class:'form-control',required:true %>
+          </div>
+          <div class="form-group">
+            <label for="compania" >compañia: </label>
+            <%= text_field_tag :compania, params[:compania],placeholder:'compañia del documento', class:'form-control',required:false %>
+          </div>
+          <div class="form-group">
+            <label for="note" >Nota: </label>
+            <%= text_area_tag :note, params[:note],placeholder:'Nota', class:'form-control',required:true %>
+          </div>
+          <div class="form-group">
+            <label for="tag">etiquetas: </label>
+            <%= select_tag  :tag , options_from_collection_for_select(@tag, "id" , "description", :selected => params[:tag] ),  multiple: true, class:'custom-select custom-select-sm' %>
+          </div>
+          <div class="form-group">
+            <label for="file">Anexar archivo </label>
+            <% if @doc.present? && @doc.anex.attached? %>
+            <span class="badge badge-pill badge-success"> tiene documento anexo</span>
+            <% else %>
+            <span  class="badge badge-pill badge-secondary"> no tiene documento anexo</span>
+            <% end %>
+            <br>
+            <%= file_field_tag :anex, required:true %>
+          </div>
+        </div>
+        <div class="card-footer">
+          <%= submit_tag 'Guardar', class:'btn btn-success' %>
+          <button type="reset" value="Reset" class="btn btn-outline-danger" data-dismiss="card">Borrar</button>
+          <%= link_to "Volver ", documents_path , class:"btn btn-dark" %>
+        </div>
+        <% end %>
+      </div>
+    </main>
+  </div>
+</div>
